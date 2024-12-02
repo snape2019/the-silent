@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #fdf5ff; /* 默认色 */
+    background-color: var(--bg-day); /* 使用变量 --bg-day 来动态控制背景色 */
     transition: background-color 0.25s ease-in-out;
     font-family: Verdana,fantasy;
 }
@@ -16,20 +16,45 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 0;     /* 外边距设为0 */
+    padding: 0;    /* 内边距设为0 */
 }
 
 /* 将开关按钮放到右上角 */
 #theme-toggle-button {
     font-size: 17px;
     position: absolute;
-    top: 10px;
+    top: 0px;
     right: 10px;
     display: inline-block;
-    width: 5em;
+    width: 4em;
     cursor: pointer;
 
+    border: 2px solid transparent; /* 透明边框，用来在按钮边缘添加效果 */
+    text-shadow: 0 0 5px rgba(192, 192, 192, 0.8), /* 闪亮的银色发光效果 */
+                 0 0 10px rgba(192, 192, 192, 0.6); /* 更大范围的光晕效果 */
+    transition: text-shadow 0.3s ease-in-out; /* 平滑的过渡效果 */
+
+    
 }
+
+
+
+
 /*加按钮边界*/
+#theme-toggle-button svg rect {
+    fill: #83cbd8; /* 默认背景色 */
+    stroke: #dcdcdc94; /* 银色描边 */
+    stroke-width: 4; /* 边框宽度 */
+    transition: stroke 0.3s ease-in-out; /* 描边颜色平滑过渡 */
+}
+
+/* 鼠标悬停时，增强描边效果 */
+#theme-toggle-button:hover svg rect {
+    stroke: #d0d0d0; /* 更亮的银色或白色 */
+    stroke-width: 6; /* 增加描边宽度 */
+}
+
 
 /* 隐藏默认HTML复选框 */
 #toggle {
@@ -44,11 +69,7 @@ body {
     transition-duration: 0.25s;
 }
 
-/* 日夜背景色 */
-:root {
-    --bg-night:#032652;
-    --bg-day:#f1f0ffc5;
-}
+
 #toggle:checked + svg #container {
     fill: var(--bg-night);
 }
@@ -101,10 +122,34 @@ body {
 .title {
     font-size: 4rem; /* 标题大小 */
     font-weight: bold;
-    color: black;
-    text-shadow: 6px 6px 12px rgb(177, 177, 177); /* 白色描边效果 */
-    margin-bottom: 30px; /* 标题与链接之间的间距 */
+    color: rgb(41, 41, 41);
+    text-shadow: 2px 2px 5px rgba(110, 110, 110, 0.8), /* 银色发光效果 */
+                 5px 5px 10px rgba(117, 117, 117, 0.6); /* 较大的光晕效果 */
+    margin-bottom: 0; /* 标题与链接之间的间距 */
     text-transform: uppercase; /* 标题大写 */
+    transition: text-shadow 0.3s ease-in-out; /* 平滑过渡 */
+
+    
+}
+
+/* 鼠标悬停时增强标题的描边效果 */
+.title:hover {
+    text-shadow: 8px 8px 12px rgb(133, 133, 133), /* 更强的银色发光效果 */
+                 0 0 20px rgba(192, 192, 192, 0.8); /* 更强的光晕效果 */
+}
+
+
+/* 全局颜色变量 */
+:root {
+    --link-color-light: #555555;  /* 亮模式的链接颜色 */
+    --link-hover-color-light: #555555;  /* 亮模式的悬停链接颜色 */
+    
+    --link-color-dark: #53a890;  /* 暗模式的链接颜色 */
+    --link-hover-color-dark: #8a8989;  /* 暗模式的悬停链接颜色 */
+    
+    --bg-night:#032652;
+    --bg-day:#989898b4;
+
 }
 
 /* 链接列表样式 */
@@ -121,13 +166,70 @@ body {
 .links a {
     font-size: 1.2rem; /* 链接字体比标题小 */
     text-decoration: none;
-    color: #929292;
+    color: var(--link-color-light); /* 通过 CSS 变量控制链接颜色 */
     padding: 5px;
     transition: color 0.3s, transform 0.3s;
 }
 
 .links a:hover {
-    color: #000000; /* 链接悬停时的颜色 */
+    color: var(--link-hover-color-light); /* 悬停时使用相应的悬停颜色 */
     transform: scale(1.2); /* 增大字体尺寸 */
+}
+
+
+
+/* 按钮链接样式 */
+.button-link {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #a9a9a992;  /* 按钮背景色 */
+    color: #111010b7;  /* 按钮文字颜色 */
+    padding: 10px 10px;  /* 修改内边距来增大按钮大小 */
+    width: 100px;  /* 设定统一的宽度 */
+    height: 50px;  /* 设定统一的高度 */
+    line-height: 50px;  /* 设置与按钮高度相同的行高，确保上下居中 */
+    font-size: 1.0rem;  /* 增大字体 */
+    border-radius: 9px;  /* 圆角大小，调小数字会让按钮角更加锐利 */
+    border: 5px solid #8b8a8ab7;  
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    text-transform: uppercase;  /* 大写文字 */
+    box-shadow: 5px 5px  rgba(76, 75, 75, 0.8), 0 0 20px rgba(78, 78, 78, 0.6);  /* 外部光晕效果 */
+}
+
+/* 鼠标悬停时增强按钮效果 */
+.button-link:hover {
+    background-color: #929191;  /* 悬停背景色 */
+    border-color: #6b6b6b;  /* 增加边框色 */
+    box-shadow: 5px 5px  rgba(76, 75, 75, 0.873), 0 0 20px rgba(78, 78, 78, 0.688);   /* 更强的光晕效果 */
+    transform: scale(1.05);  /* 鼠标悬停时略微放大按钮 */
+}
+
+/* 增强链接的文本效果 */
+.button-link span {
+    display: block;
+}
+.box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* 设定两列布局 */
+    gap: 10px;  /* 设置按钮之间的间距为更小的值（可以根据需要调整） */
+    margin: 0;  /* 取消默认外边距 */
+    margin-top: 50px;  /* 增加 .box 与上方元素（如 title）之间的距离 */
+}
+
+/* 每个按钮容器 */
+figure {
+    margin: 0;  /* 去掉默认外边距 */
+    padding: 10px;  /* 给按钮添加内边距，确保按钮之间的间距相等 */
+    box-sizing: border-box;  /* 包含内边距和边框的总宽度计算在内 */
+}
+
+/* 描述文字的样式 */
+.subtitle {
+    font-size: 1.2rem;  /* 设置字体大小 */
+    color: #666666b8;  /* 设置字体颜色 */
+    /*font-style: italic;   设置为斜体 */
+    margin-top: 0;  /* 确保描述文字和标题之间没有额外的间距 */
 }
 
