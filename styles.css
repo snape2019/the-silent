@@ -1,0 +1,133 @@
+/* 页面整体背景颜色 */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fdf5ff; /* 默认色 */
+    transition: background-color 0.25s ease-in-out;
+    font-family: Verdana,fantasy;
+}
+
+/* 容器样式 */
+.container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* 将开关按钮放到右上角 */
+#theme-toggle-button {
+    font-size: 17px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+    width: 5em;
+    cursor: pointer;
+
+}
+/*加按钮边界*/
+
+/* 隐藏默认HTML复选框 */
+#toggle {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#container, #patches, #stars, #button, #sun, #moon, #cloud {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.25s;
+}
+
+/* 日夜背景色 */
+:root {
+    --bg-night:#032652;
+    --bg-day:#f1f0ffc5;
+}
+#toggle:checked + svg #container {
+    fill: var(--bg-night);
+}
+
+/* 按钮右移 */
+#toggle:checked + svg #button {
+    transform: translate(28px, 2.333px);
+}
+
+/* 根据开关状态显示隐藏太阳和月亮 */
+#sun {
+    opacity: 1;
+}
+
+#toggle:checked + svg #sun {
+    opacity: 0;
+}
+
+#moon {
+    opacity: 0;
+}
+
+#toggle:checked + svg #moon {
+    opacity: 1;
+}
+
+/* 根据开关状态显示隐藏背景元素 */
+#cloud {
+    opacity: 1;
+}
+
+#toggle:checked + svg #cloud {
+    opacity: 0;
+}
+
+#stars {
+    opacity: 0;
+}
+
+#toggle:checked + svg #stars {
+    opacity: 1;
+}
+
+/* 文字内容居中 */
+.content {
+    text-align: center;
+}
+
+/* 标题样式 */
+.title {
+    font-size: 4rem; /* 标题大小 */
+    font-weight: bold;
+    color: black;
+    text-shadow: 6px 6px 12px rgb(177, 177, 177); /* 白色描边效果 */
+    margin-bottom: 30px; /* 标题与链接之间的间距 */
+    text-transform: uppercase; /* 标题大写 */
+}
+
+/* 链接列表样式 */
+.links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links li {
+    margin: 10px 0; /* 每个链接之间的间距 */
+}
+
+.links a {
+    font-size: 1.2rem; /* 链接字体比标题小 */
+    text-decoration: none;
+    color: #929292;
+    padding: 5px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.links a:hover {
+    color: #000000; /* 链接悬停时的颜色 */
+    transform: scale(1.2); /* 增大字体尺寸 */
+}
+
