@@ -1,31 +1,54 @@
+
 /* 页面整体背景颜色 */
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--bg-day); /* 使用变量 --bg-day 来动态控制背景色 */
-    transition: background-color 0.25s ease-in-out;
+
+
     font-family: Verdana,fantasy;
 }
+/* 添加全局的颜色过渡 */
+* {
+    transition: all 0.5s ease-in-out; /* 所有属性的过渡 */
+}
+/* 主体样式 */
+main {
 
-/* 容器样式 */
-.container {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
+
+	min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+	text-align: center;
     margin: 0;     /* 外边距设为0 */
     padding: 0;    /* 内边距设为0 */
+    background: var(--bg,white);
+    color: var(--text,black);
+
 }
+
+
+
+.content {
+    background: var(--bg);
+    text-align: center;
+    max-width: 700px;
+	margin: 0 auto;
+}
+/*开关变换主题样式*/
+
+.theme-switch-input:checked ~ main {
+    --bg: black;
+    --text: white;
+}
+
 
 /* 将开关按钮放到右上角 */
 #theme-toggle-button {
     font-size: 17px;
     position: absolute;
-    top: 0px;
-    right: 10px;
+    top: 8px;
+    right: 0px;
     display: inline-block;
     width: 4em;
     cursor: pointer;
@@ -33,20 +56,25 @@ body {
     border: 2px solid transparent; /* 透明边框，用来在按钮边缘添加效果 */
     text-shadow: 0 0 5px rgba(192, 192, 192, 0.8), /* 闪亮的银色发光效果 */
                  0 0 10px rgba(192, 192, 192, 0.6); /* 更大范围的光晕效果 */
-    transition: text-shadow 0.3s ease-in-out; /* 平滑的过渡效果 */
+
 
     
 }
 
+#toggle,#theme-toggle-button{
+    position: absolute;
+    z-index: 1;
 
-
-
+}
+#toggle{
+    opacity: 0;
+}
 /*加按钮边界*/
 #theme-toggle-button svg rect {
     fill: #83cbd8; /* 默认背景色 */
     stroke: #dcdcdc94; /* 银色描边 */
     stroke-width: 4; /* 边框宽度 */
-    transition: stroke 0.3s ease-in-out; /* 描边颜色平滑过渡 */
+
 }
 
 /* 鼠标悬停时，增强描边效果 */
@@ -63,15 +91,15 @@ body {
     height: 0;
 }
 
-#container, #patches, #stars, #button, #sun, #moon, #cloud {
+#main, #patches, #stars, #button, #sun, #moon, #cloud {
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 0.25s;
 }
 
-
-#toggle:checked + svg #container {
-    fill: var(--bg-night);
+/* night sky background */
+#toggle:checked + svg #main {
+    fill: #2b4360;
 }
 
 /* 按钮右移 */
@@ -96,7 +124,7 @@ body {
     opacity: 1;
 }
 
-/* 根据开关状态显示隐藏背景元素 */
+
 #cloud {
     opacity: 1;
 }
@@ -113,21 +141,18 @@ body {
     opacity: 1;
 }
 
-/* 文字内容居中 */
-.content {
-    text-align: center;
-}
+
 
 /* 标题样式 */
 .title {
     font-size: 4rem; /* 标题大小 */
     font-weight: bold;
-    color: rgb(41, 41, 41);
+    color: var(--text);
     text-shadow: 2px 2px 5px rgba(110, 110, 110, 0.8), /* 银色发光效果 */
-                 5px 5px 10px rgba(117, 117, 117, 0.6); /* 较大的光晕效果 */
+                 0px 0px 10px rgba(117, 117, 117, 0.6); /* 较大的光晕效果 */
     margin-bottom: 0; /* 标题与链接之间的间距 */
     text-transform: uppercase; /* 标题大写 */
-    transition: text-shadow 0.3s ease-in-out; /* 平滑过渡 */
+
 
     
 }
@@ -139,71 +164,36 @@ body {
 }
 
 
-/* 全局颜色变量 */
-:root {
-    --link-color-light: #555555;  /* 亮模式的链接颜色 */
-    --link-hover-color-light: #555555;  /* 亮模式的悬停链接颜色 */
-    
-    --link-color-dark: #53a890;  /* 暗模式的链接颜色 */
-    --link-hover-color-dark: #8a8989;  /* 暗模式的悬停链接颜色 */
-    
-    --bg-night:#032652;
-    --bg-day:#989898b4;
-
-}
-
-/* 链接列表样式 */
-.links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.links li {
-    margin: 10px 0; /* 每个链接之间的间距 */
-}
-
-.links a {
-    font-size: 1.2rem; /* 链接字体比标题小 */
-    text-decoration: none;
-    color: var(--link-color-light); /* 通过 CSS 变量控制链接颜色 */
-    padding: 5px;
-    transition: color 0.3s, transform 0.3s;
-}
-
-.links a:hover {
-    color: var(--link-hover-color-light); /* 悬停时使用相应的悬停颜色 */
-    transform: scale(1.2); /* 增大字体尺寸 */
-}
-
-
 
 /* 按钮链接样式 */
 .button-link {
     display: inline-block;
     text-decoration: none;
-    background-color: #a9a9a992;  /* 按钮背景色 */
-    color: #111010b7;  /* 按钮文字颜色 */
+    color: var(--text);
+    background-color: linear-gradient(145deg, #e0e0e0, #b0b0b0); /* 更加明显的金属渐变 */
+    color: --text;  /* 按钮文字颜色 */
     padding: 10px 10px;  /* 修改内边距来增大按钮大小 */
-    width: 100px;  /* 设定统一的宽度 */
-    height: 50px;  /* 设定统一的高度 */
-    line-height: 50px;  /* 设置与按钮高度相同的行高，确保上下居中 */
-    font-size: 1.0rem;  /* 增大字体 */
-    border-radius: 9px;  /* 圆角大小，调小数字会让按钮角更加锐利 */
-    border: 5px solid #8b8a8ab7;  
+    width: 70px;  /* 设定统一的宽度 */
+    height: 35px;  /* 设定统一的高度 */
+    line-height: 35px;  /* 设置与按钮高度相同的行高，确保上下居中 */
+    font-size: 0.7rem;  /* 增大字体 */
+    border-radius: 11px;  /* 圆角大小，调小数字会让按钮角更加锐利 */
+    border: 3px solid #999;  
     text-align: center;
-    transition: all 0.3s ease-in-out;
+
     font-weight: bold;
     text-transform: uppercase;  /* 大写文字 */
-    box-shadow: 5px 5px  rgba(76, 75, 75, 0.8), 0 0 20px rgba(78, 78, 78, 0.6);  /* 外部光晕效果 */
+    box-shadow: 5px 5px 10px rgba(76, 75, 75, 0.6), 
+    -5px -5px 10px rgba(255, 255, 255, 0.6); /* 外部光晕效果 */
 }
 
 /* 鼠标悬停时增强按钮效果 */
 .button-link:hover {
-    background-color: #929191;  /* 悬停背景色 */
+    background-color: linear-gradient(145deg, #d0d0d0, #a0a0a0); /* 悬停时渐变色稍微变化 */
     border-color: #6b6b6b;  /* 增加边框色 */
-    box-shadow: 5px 5px  rgba(76, 75, 75, 0.873), 0 0 20px rgba(78, 78, 78, 0.688);   /* 更强的光晕效果 */
-    transform: scale(1.05);  /* 鼠标悬停时略微放大按钮 */
+    box-shadow: 5px 5px 15px rgba(76, 75, 75, 0.8), 
+    -5px -5px 15px rgba(255, 255, 255, 0.8);   /* 更强的光晕效果 */
+    transform: scale(1.1);  /* 鼠标悬停时略微放大按钮 */
 }
 
 /* 增强链接的文本效果 */
@@ -215,7 +205,7 @@ body {
     grid-template-columns: repeat(2, 1fr);  /* 设定两列布局 */
     gap: 10px;  /* 设置按钮之间的间距为更小的值（可以根据需要调整） */
     margin: 0;  /* 取消默认外边距 */
-    margin-top: 50px;  /* 增加 .box 与上方元素（如 title）之间的距离 */
+    margin-top: 50px;  /* 增加 .box 与上方元素之间的距离 */
 }
 
 /* 每个按钮容器 */
