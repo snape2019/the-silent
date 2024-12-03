@@ -2,12 +2,12 @@
 /*浅色主题*/
 .light-theme{
     --bg:#729aa1a2;
-    --text:black;
+    --text:rgb(59, 58, 58);
 }
 /*深色主题*/
 .dark-theme{
     --bg:#2b4360;
-    --text:white;
+    --text:rgb(199, 196, 196);
 }
 /* 页面整体背景颜色 */
 body {
@@ -151,17 +151,39 @@ main {
 
 /* 标题样式 */
 .title {
-    font-size: 4rem; /* 标题大小 */
+    font-size: 4rem;
     font-weight: bold;
     color: var(--text);
-    text-shadow: 2px 2px 5px rgba(110, 110, 110, 0.8), /* 银色发光效果 */
-                 0px 0px 10px rgba(117, 117, 117, 0.6); /* 较大的光晕效果 */
-    margin-bottom: 0; /* 标题与链接之间的间距 */
-    text-transform: uppercase; /* 标题大写 */
+    text-transform: uppercase; 
+    color: #fff; 
+    text-align: center; 
+    letter-spacing: -3px;
+    text-shadow:     
+    1px 1px 0 hsl(174,5%,80%),
+    2px 2px 0 hsl(174,5%,75%),
+    3px 3px 0 hsl(174,5%,70%),
+    4px 4px 0 hsl(174,5%,66%),
+    5px 5px 0 hsl(174,5%,64%),
+    6px 6px 0 hsl(174,5%,62%),
+    7px 7px 0 hsl(174,5%,61%),
+    8px 8px 0 hsl(174,5%,60%),
+	0 0 5px rgba(0,0,0,.05),
+	1px 1px 3px rgba(0,0,0,.2),
+	3px 3px 5px rgba(0,0,0,.2),
+	5px 5px 10px rgba(0,0,0,.2),
+	10px 10px 10px rgba(0,0,0,.2),
+	20px 20px 20px rgba(0,0,0,.3);
 
 
-    
 }
+
+
+
+
+
+
+
+
 
 /* 鼠标悬停时增强标题的描边效果 */
 .title:hover {
