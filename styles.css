@@ -1,20 +1,29 @@
 
+/*浅色主题*/
+.light-theme{
+    --bg:#729aa1a2;
+    --text:black;
+}
+/*深色主题*/
+.dark-theme{
+    --bg:#2b4360;
+    --text:white;
+}
 /* 页面整体背景颜色 */
 body {
     margin: 0;
     padding: 0;
-
-
     font-family: Verdana,fantasy;
+    background: var(--bg,#729aa1a2);
+    color: var(--text);
 }
 /* 添加全局的颜色过渡 */
 * {
     transition: all 0.5s ease-in-out; /* 所有属性的过渡 */
 }
+
 /* 主体样式 */
 main {
-
-
 	min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -22,25 +31,22 @@ main {
 	text-align: center;
     margin: 0;     /* 外边距设为0 */
     padding: 0;    /* 内边距设为0 */
-    background: var(--bg,white);
-    color: var(--text,black);
+    background: var(--bg);
+    color: var(--text);
 
 }
 
 
 
 .content {
-    background: var(--bg);
+
     text-align: center;
     max-width: 700px;
 	margin: 0 auto;
 }
-/*开关变换主题样式*/
 
-.theme-switch-input:checked ~ main {
-    --bg: black;
-    --text: white;
-}
+
+
 
 
 /* 将开关按钮放到右上角 */
@@ -169,18 +175,17 @@ main {
 .button-link {
     display: inline-block;
     text-decoration: none;
-    color: var(--text);
     background-color: linear-gradient(145deg, #e0e0e0, #b0b0b0); /* 更加明显的金属渐变 */
-    color: --text;  /* 按钮文字颜色 */
+    color: var(--text);  /* 按钮文字颜色 */
     padding: 10px 10px;  /* 修改内边距来增大按钮大小 */
-    width: 70px;  /* 设定统一的宽度 */
+    width: 80px;  /* 设定统一的宽度 */
     height: 35px;  /* 设定统一的高度 */
     line-height: 35px;  /* 设置与按钮高度相同的行高，确保上下居中 */
     font-size: 0.7rem;  /* 增大字体 */
     border-radius: 11px;  /* 圆角大小，调小数字会让按钮角更加锐利 */
     border: 3px solid #999;  
     text-align: center;
-
+    transition: all 0.5s ease-in-out;
     font-weight: bold;
     text-transform: uppercase;  /* 大写文字 */
     box-shadow: 5px 5px 10px rgba(76, 75, 75, 0.6), 
